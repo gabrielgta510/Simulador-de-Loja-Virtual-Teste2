@@ -56,7 +56,7 @@ public class GerenciamentoLoja {
             for (Produto produto : estoque) {
                 String msg = String.format("|R$ %.2f\n", produto.getPrecoDeCusto());
                 System.out.println(produto + msg);
-                total+= produto.getPrecoDeCusto() * produto.getQuantidade();
+                total += produto.getPrecoDeCusto() * produto.getQuantidade();
             }
             return String.format("\nTotal gasto no estoque: R$ %.2f", total);
         }

@@ -23,6 +23,12 @@ public class Cliente {
     public void setNumPedido(Integer numPedido) {
         this.numPedido = numPedido;
     }
+    public LocalDateTime getDataRegistro() {
+        return dataRegistro;
+    }
+    public void setDataRegistro(LocalDateTime dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
     public String getEmail() {
         return email;
     }

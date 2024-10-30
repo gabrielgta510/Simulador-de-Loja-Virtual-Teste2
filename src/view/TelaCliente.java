@@ -8,7 +8,6 @@ import model.CarrinhoDeCompras;
 import model.CartaoDeCredito;
 import model.Cliente;
 import model.Endereco;
-import model.Item;
 import model.Pedido;
 import model.Produto;
 
@@ -81,14 +80,14 @@ public class TelaCliente {
             System.out.println(txt1);
             input1.close();
             Cliente novoCliente = new Cliente(email, senha, nome, cpf, telefone, listaVaziaEnderecos, nascimento, cartoesSalvoVazio, listaVaziaPedidos);
-            mostrarTelaFinalizandoCompra(novoCarrinho, novoCliente);
+            GerenciamentoCliente.mostrarTelaFinalizandoCompra(novoCarrinho, novoCliente);
         } else {
             //E-mail cadastrado.
             System.out.print("Senha: ");
             String senha = input1.nextLine();
             input1.close();
             Object novoCliente = GerenciamentoCliente.verificarLogin(email, senha);
-            mostrarTelaFinalizandoCompra(novoCarrinho, (Cliente) novoCliente);
+            GerenciamentoCliente.mostrarTelaFinalizandoCompra(novoCarrinho, (Cliente) novoCliente);
         }
     }
 
@@ -148,123 +147,6 @@ public class TelaCliente {
         } else {
             for (CartaoDeCredito cartao : listaCartoes) {
                 System.out.println(cartao);
-            }
-        }
-    }
-
-    public static void mostrarTelaFinalizandoCompra(CarrinhoDeCompras novoCarrinho, Cliente novoCliente) {
-        ArrayList<Endereco> listaEnderecos = novoCliente.getEnderecos();
-        imprimirListaDeEnderecos(listaEnderecos);
-        if (novoCliente.getEnderecos().isEmpty()) {
-            mostrarCadastroEndereco(novoCliente);
-            System.out.println("Novo endereço cadastrado com sucesso!");
-            System.out.println("Digite qualquer coisa: ");
-            int teste = input.nextInt();
-            System.out.println(teste);
-            Endereco enderecoSelec = novoCliente.getEnderecos().get(0);
-            //(Endereco enderecoEntrega, CartaoDeCredito cartaoPagamento, int numPedido, String statusPedido)
-            String statusPedido = "Pedido Criado";
-            ArrayList<CartaoDeCredito> listaCartoes = novoCliente.getCartoesSalvo();
-            imprimirListaCartoes(listaCartoes);
-            mostrarCadastroDeCC(novoCliente);
-            CartaoDeCredito novoCartao = novoCliente.getCartoesSalvo().get(0);
-            ArrayList<Item> produtosPedido = novoCarrinho.getItens();
-            Pedido novoPedido = new Pedido(enderecoSelec, novoCartao, 1, statusPedido, produtosPedido);
-            novoCliente.addPedido(novoPedido);
-            System.out.println("Pedido conclído com sucesso!");
-            ArrayList<Item> novoItem = new ArrayList<>();            
-            CarrinhoDeCompras novoCarrinhoDeCompras = new CarrinhoDeCompras(novoItem, statusPedido);
-            mostraMenuUsuario(novoCarrinhoDeCompras);
-        } else {
-            System.out.println("Deseja cadastrar um novo endereço? [S/N]");
-            String teste = input.nextLine().toUpperCase();
-
-            if ("S".equals(teste)) {
-                mostrarCadastroEndereco(novoCliente);
-                System.out.println("Digite qualquer coisa: ");
-                String avan = input.nextLine();
-                System.out.println(avan);
-                ArrayList<Endereco> listaEnderecos2 = novoCliente.getEnderecos();
-                imprimirListaDeEnderecos(listaEnderecos2);
-                System.out.print("Selecione um endereço de entrega: ");
-                int num1 = input.nextInt();
-                Endereco enderecoSelec = novoCliente.getEnderecos().get(num1-1);
-                ArrayList<CartaoDeCredito> listaCartoes = novoCliente.getCartoesSalvo();
-                imprimirListaCartoes(listaCartoes);
-                System.out.println("Deseja cadastrar um novo cartão? [S/N]");
-                String teste1 = input.nextLine().toUpperCase();
-                /// ============================ IGUAL 1 ==========================================================
-                if ("S".equals(teste1)) {
-                    mostrarCadastroDeCC(novoCliente);
-                    ArrayList<CartaoDeCredito> listaCartoes1 = novoCliente.getCartoesSalvo();
-                    imprimirListaCartoes(listaCartoes1);
-                    CartaoDeCredito cartaoCompra = novoCliente.getCartoesSalvo().getLast();
-                    int num2 = 3;
-                    String statusPedido = "Peidido Criado!";
-                    ArrayList<Item> produtosPedido = novoCarrinho.getItens();
-                    Pedido novoPedido = new Pedido(enderecoSelec, cartaoCompra, num2, statusPedido, produtosPedido);
-                    novoCliente.addPedido(novoPedido);
-                    System.out.println("Digite qualquer coisa para voltar ao ínicio:");
-                    String qualquer = input.nextLine();
-                    ArrayList<Item> novoItem = new ArrayList<>();            
-                    CarrinhoDeCompras novoCarrinhoDeCompras = new CarrinhoDeCompras(novoItem, qualquer);
-                    mostraMenuUsuario(novoCarrinhoDeCompras);
-                } else {
-                    System.out.print("Selecione um cartão: ");
-                    int ccSelec = input.nextInt();
-                    CartaoDeCredito cartaoCompra = novoCliente.getCartoesSalvo().get(ccSelec-1);
-                    int num2 = 3;
-                    String statusPedido = "Peidido Criado!";
-                    ArrayList<Item> produtosPedido = novoCarrinho.getItens();
-                    Pedido novoPedido = new Pedido(enderecoSelec, cartaoCompra, num2, statusPedido, produtosPedido);
-                    novoCliente.addPedido(novoPedido);
-                    System.out.println("Digite qualquer coisa para voltar ao ínicio:");
-                    String qualquer = input.nextLine();
-                    ArrayList<Item> novoItem = new ArrayList<>();            
-                    CarrinhoDeCompras novoCarrinhoDeCompras = new CarrinhoDeCompras(novoItem, qualquer);
-                    mostraMenuUsuario(novoCarrinhoDeCompras);
-                }
-                /// ============================ IGUAL 1 ==========================================================
-            } else {
-                System.out.print("Selecione um endereço de entrega: ");
-                int num1 = input.nextInt();
-                Endereco enderecoSelec = novoCliente.getEnderecos().get(num1-1);
-                ArrayList<CartaoDeCredito> listaCartoes = novoCliente.getCartoesSalvo();
-                imprimirListaCartoes(listaCartoes);
-                System.out.println("Deseja cadastrar um novo cartão? [S/N]");
-                String teste1 = input.nextLine().toUpperCase();
-                /// ============================ IGUAL 1 ==========================================================
-                if ("S".equals(teste1)) {
-                    mostrarCadastroDeCC(novoCliente);
-                    ArrayList<CartaoDeCredito> listaCartoes1 = novoCliente.getCartoesSalvo();
-                    imprimirListaCartoes(listaCartoes1);
-                    CartaoDeCredito cartaoCompra = novoCliente.getCartoesSalvo().getLast();
-                    int num2 = 3;
-                    String statusPedido = "Peidido Criado!";
-                    ArrayList<Item> produtosPedido = novoCarrinho.getItens();
-                    Pedido novoPedido = new Pedido(enderecoSelec, cartaoCompra, num2, statusPedido, produtosPedido);
-                    novoCliente.addPedido(novoPedido);
-                    System.out.println("Digite qualquer coisa para voltar ao ínicio:");
-                    String qualquer = input.nextLine();
-                    ArrayList<Item> novoItem = new ArrayList<>();            
-                    CarrinhoDeCompras novoCarrinhoDeCompras = new CarrinhoDeCompras(novoItem, qualquer);
-                    mostraMenuUsuario(novoCarrinhoDeCompras);
-                } else {
-                    System.out.print("Selecione um cartão: ");
-                    int ccSelec = input.nextInt();
-                    CartaoDeCredito cartaoCompra = novoCliente.getCartoesSalvo().get(ccSelec-1);
-                    int num2 = 3;
-                    String statusPedido = "Peidido Criado!";
-                    ArrayList<Item> produtosPedido = novoCarrinho.getItens();
-                    Pedido novoPedido = new Pedido(enderecoSelec, cartaoCompra, num2, statusPedido, produtosPedido);
-                    novoCliente.addPedido(novoPedido);
-                    System.out.println("Digite qualquer coisa para voltar ao ínicio:");
-                    String qualquer = input.nextLine();
-                    ArrayList<Item> novoItem = new ArrayList<>();            
-                    CarrinhoDeCompras novoCarrinhoDeCompras = new CarrinhoDeCompras(novoItem, qualquer);
-                    mostraMenuUsuario(novoCarrinhoDeCompras);
-                }
-                /// ============================ IGUAL 1 ==========================================================
             }
         }
     }
