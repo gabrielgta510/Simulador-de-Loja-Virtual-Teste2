@@ -1,5 +1,6 @@
 package view;
 
+import control.GerenciamentoCliente;
 import java.util.ArrayList;
 import java.util.Scanner;
 import model.CarrinhoDeCompras;
@@ -17,7 +18,7 @@ public class TelaPrincipal {
         System.out.println("\tMENU INICIAL");
         System.out.println("\t\t1. Módulo Cliente");//Faz o gerenciamento de usuário -- CRUD
         System.out.println("\t\t2. Módulo Produto");//Faz o gerenciamento de produto da loja -- CRUD
-        System.out.println("\t\t3. Loja Virtual\n");    
+        System.out.println("\t\t3. Mostrar Clientes Cadastrados\n");    
         System.out.print("Escolha umas das opções acima ");
         opt = input.nextLine();
 
@@ -28,6 +29,7 @@ public class TelaPrincipal {
                 TelaCliente.mostraMenuUsuario(novoCarrinho);
             }
             case "2" -> TelaProduto.mostraMenuProduto();
+            case "3" -> GerenciamentoCliente.mostrarClientesCadastrados();
             default -> {
             }
         }

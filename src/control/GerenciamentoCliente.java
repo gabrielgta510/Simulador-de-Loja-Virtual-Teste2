@@ -13,7 +13,7 @@ import view.TelaCliente;
  * Todo gerenciamento de usuários será por essa classe de controle
  */
 public class GerenciamentoCliente {
-    public static Scanner input = new Scanner(System.in);
+    public static final Scanner input = new Scanner(System.in);
     public static ArrayList<Cliente> usuarios = new ArrayList<>();
     public static ArrayList<String> listaEmails = new ArrayList<>();
 
@@ -32,6 +32,8 @@ public class GerenciamentoCliente {
     }
 
     public static boolean verificaEmail(String email) {
+        System.out.print("Login: ");
+        email = input.nextLine();
         for (Cliente clienteCAD : usuarios) {
             if ((clienteCAD.getEmail().equals(email))) {
                 return true;
@@ -149,6 +151,18 @@ public class GerenciamentoCliente {
                 novoCliente.addPedido(novoPedido);
             }
         }
+    }
+
+    public static void mostrarClientesCadastrados() {
+        int num = 0;
+        for (Cliente cliente : usuarios) {
+            num += 1;
+            System.out.println(num + "° Cliente ===================================");
+            System.out.println(cliente);
+        }
+        System.out.println("Digite para voltar: ");
+        String espere = input.nextLine();
+        System.out.println(espere);
     }
 
 

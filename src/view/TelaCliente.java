@@ -53,40 +53,37 @@ public class TelaCliente {
         }
     }
 
-    public static void mostrarloginCliente(CarrinhoDeCompras novoCarrinho) {
-        Scanner input1 = new Scanner(System.in);
-        System.out.print("\033[H\033[2J"); // Limpar a tela
+    public static void mostrarloginCliente(CarrinhoDeCompras novoCarrinho) throws InterruptedException {
+        System.out.println("\033[H\033[2J"); // Limpar a tela
         System.out.println("=========== LOJA VIRTUAL ===========\n");
-        System.out.print("Login: ");
-        String email = input1.nextLine();
+        String email = "";
         ctr = GerenciamentoCliente.verificaEmail(email);
         if (ctr == false) {
+
             //E-mail não cadastrado.
             System.out.println("\nVamos criar sua nova conta:\n");
             System.out.print("Senha: ");
-            String senha = input1.nextLine(); //Variável de cada item do construtor
+            String senha = input.nextLine(); //Variável de cada item do construtor
             System.out.print("Nome completo: ");
-            String nome = input1.nextLine(); //Variável de cada item do construtor
+            String nome = input.nextLine(); //Variável de cada item do construtor
             System.out.print("CPF: ");
-            String cpf = input1.nextLine(); //Variável de cada item do construtor
+            String cpf = input.nextLine(); //Variável de cada item do construtor
             System.out.print("Telefone: ");
-            String telefone = input1.nextLine(); //Variável de cada item do construtor
+            String telefone = input.nextLine(); //Variável de cada item do construtor
             System.out.print("Data de nascimento: ");
-            String nascimento = input1.nextLine(); //Variável de cada item do construtor
+            String nascimento = input.nextLine(); //Variável de cada item do construtor
             ArrayList<Endereco> listaVaziaEnderecos = new ArrayList<>();
             ArrayList<CartaoDeCredito> cartoesSalvoVazio = new ArrayList<>();
             ArrayList<Pedido> listaVaziaPedidos = new ArrayList<>();
             System.out.println("Clique qualquer tecla para avançar.");
-            String txt1 = input1.nextLine();
+            String txt1 = input.nextLine();
             System.out.println(txt1);
-            input1.close();
             Cliente novoCliente = new Cliente(email, senha, nome, cpf, telefone, listaVaziaEnderecos, nascimento, cartoesSalvoVazio, listaVaziaPedidos);
             GerenciamentoCliente.mostrarTelaFinalizandoCompra(novoCarrinho, novoCliente);
         } else {
             //E-mail cadastrado.
             System.out.print("Senha: ");
-            String senha = input1.nextLine();
-            input1.close();
+            String senha = input.nextLine();
             Object novoCliente = GerenciamentoCliente.verificarLogin(email, senha);
             GerenciamentoCliente.mostrarTelaFinalizandoCompra(novoCarrinho, (Cliente) novoCliente);
         }
@@ -94,22 +91,27 @@ public class TelaCliente {
 
     @SuppressWarnings("ConvertToTryWithResources")
     public static void mostrarCadastroEndereco(Cliente novoCliente) {
-        Scanner input2 = new Scanner(System.in);
         String rua, numLugar, bairro, cidade, estado;
         System.out.println("========== NOVO ENDEREÇO ===========");
-        System.out.print("Rua: ");
-        rua = input2.nextLine();
-        System.out.print("Número: ");
-        numLugar = input2.nextLine();
-        System.out.print("Bairro: ");
-        bairro = input2.nextLine();
-        System.out.print("Cidade: ");
-        cidade = input2.nextLine();
-        System.out.print("Estado: ");
-        estado = input2.nextLine();
-        input2.close();
+    
+        try {
+            System.out.print("Rua: ");
+            rua = input.nextLine();
+            System.out.print("Número: ");
+            numLugar = input.nextLine();
+            System.out.print("Bairro: ");
+            bairro = input.nextLine();
+            System.out.print("Cidade: ");
+            cidade = input.nextLine();
+            System.out.print("Estado: ");
+            estado = input.nextLine();
+    
+            GerenciamentoCliente.cadastrarEnderecoCliente(novoCliente, bairro, cidade, estado, numLugar, rua);
+            System.out.println("Endereço cadastrado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar o endereço: " + e.getMessage());
+        }
         System.out.println("====================================");
-        GerenciamentoCliente.cadastrarEnderecoCliente(novoCliente, bairro, cidade, estado, numLugar, rua);
     }
 
     public static void imprimirListaDeEnderecos(ArrayList<Endereco> listaEnderecos) {

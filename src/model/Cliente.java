@@ -123,5 +123,27 @@ public class Cliente {
     public ArrayList<Pedido> getListaPedidos() {
         return listaPedidos;
     }
+
+    @Override
+    public String toString() {
+        System.out.println("E-mail: " + email + " |Senha: " + senha);
+        System.out.println("\nNome: " + nomeCliente + "       |CPF: " + cpf);
+        System.out.println("\nTelefone: " + telefone + "       |Data de Nascimento: " + dataNascimento);
+        System.out.println("\nMeus Endereços ==============================");
+        for (Endereco endereco : listaEnderecos) {
+            System.out.println(endereco);
+        }
+        System.out.println("\nMeus Cartões ================================");
+        for (CartaoDeCredito cartaoDeCredito : cartoesSalvo) {
+            System.out.println(cartaoDeCredito);
+        }
+        System.out.println("\nMeus Pedidos ================================");
+        for (Pedido pedido : listaPedidos) {
+            System.out.println(pedido);
+        }
+        return "=============================================";
+    }
+
+    
 }
 

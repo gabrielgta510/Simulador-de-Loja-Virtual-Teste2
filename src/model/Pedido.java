@@ -73,5 +73,21 @@ public class Pedido {
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
-    
+
+    @Override
+    public String toString() {
+        int num = 0;
+        num += 1;
+        System.out.println(num + "° Pedido -------------------------");
+        System.out.println("  Status do Pedido: " + statusPedido);
+        System.out.println("\nProdutos comprados: ");
+        for (Item item : produtosPedido) {
+            System.out.println(String.format("%-20s %d X R$ %.2f\n", item.getNomeItem(), item.getQuantidade(), item.getValor()));
+        }
+        System.out.println("Valor total do pedido: " + valorTotal);
+        System.out.println("  Pedido realizado em: " + dataPedido);
+        System.out.println(enderecoEntrega);
+        System.out.println(cartaoPagamento);
+        return "------------------------------------";
+    }
 }
