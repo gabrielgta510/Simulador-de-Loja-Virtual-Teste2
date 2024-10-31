@@ -22,12 +22,12 @@ public class Principal {
      * Método apenas para escrever menu na tela.
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //GerenciamentoCliente gerenciamentoUsuario = new GerenciamentoCliente();
         //TelaPrincipal.mostraMenuInicial();
         
         Produto produto1 = new Produto("Camiseta", 10, 15.99f, 1);
-        Produto produto2 = new Produto("Calça Jeans", 15, 59.99f, 1);
+        Produto produto2 = new Produto("Calça Jeans", 15, 59.99f, 2);
         Produto produto3 = new Produto("Tênis", 8, 79.99f, 3);
         Produto produto4 = new Produto("Boné", 20, 9.99f, 4);
         Produto produto5 = new Produto("Relógio", 13, 199.99f, 5);
@@ -87,7 +87,6 @@ public class Principal {
             new Cliente("carlos.lima@example.com", "senha789", "Carlos Lima", "345.678.901-23", "97777-7777", new ArrayList<>(Arrays.asList(endereco3)), "03/03/1985", new ArrayList<>(Arrays.asList(cartao1, cartao2)), new ArrayList<>(Arrays.asList(pedido1, pedido2)))));
         GerenciamentoCliente.setUsuarios(clientes);
         // Print ou utilize os objetos conforme necessário
-        GerenciamentoCliente gerenciamentoUsuario = new GerenciamentoCliente();
         TelaPrincipal.mostraMenuInicial();
 
         ArrayList<Item> listaVazia = new ArrayList<>();

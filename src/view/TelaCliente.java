@@ -10,13 +10,14 @@ import model.Cliente;
 import model.Endereco;
 import model.Pedido;
 import model.Produto;
+import static view.TelaPrincipal.mostraMenuInicial;
 
 public class TelaCliente {
     private static Integer opt = 0;
     private static boolean ctr = true;
-    public static Scanner input = new Scanner(System.in);
+    public static final Scanner input = new Scanner(System.in);
 
-    public static void escolherProduto(CarrinhoDeCompras novoCarrinho) {
+    public static void escolherProduto(CarrinhoDeCompras novoCarrinho) throws InterruptedException {
         System.out.print("\033[H\033[2J"); // Limpar a tela
         System.out.println("=========== LOJA VIRTUAL ===========");
         GerenciamentoLoja.mostrarProdutosCliente();
@@ -37,7 +38,7 @@ public class TelaCliente {
         mostraMenuUsuario(novoCarrinho);
     }
 
-    public static void mostrarCarrinhoDeCompras(CarrinhoDeCompras novoCarrinho) {
+    public static void mostrarCarrinhoDeCompras(CarrinhoDeCompras novoCarrinho) throws InterruptedException {
         System.out.println(novoCarrinho);
         System.out.println("MENU:");
         System.out.println("  1. Ir para o login");
@@ -151,7 +152,7 @@ public class TelaCliente {
         }
     }
 
-    public static void mostraMenuUsuario(CarrinhoDeCompras novoCarrinho){
+    public static void mostraMenuUsuario(CarrinhoDeCompras novoCarrinho) throws InterruptedException{
         System.out.print("\033[H\033[2J"); // Limpar a tela
         System.out.println("=========== LOJA VIRTUAL ===========");
         GerenciamentoLoja.mostrarProdutosCliente();
@@ -160,13 +161,14 @@ public class TelaCliente {
         System.out.println("MENU:");
         System.out.println("  1. Escolher um produto");
         System.out.println("  2. Ir para o carrinho");
-        System.out.println("  3. Fazer login");
+        System.out.println("  3. Voltar para a Tela Principal");
         System.out.println("====================================");
         System.out.print("Escolha um comando: ");
         opt = input.nextInt();
         switch (opt) {
             case 1 -> escolherProduto(novoCarrinho);
             case 2 -> mostrarCarrinhoDeCompras(novoCarrinho);
+            case 3 -> mostraMenuInicial();
             default -> {
             }
         }

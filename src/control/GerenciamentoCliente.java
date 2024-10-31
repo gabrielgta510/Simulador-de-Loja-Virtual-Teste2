@@ -8,7 +8,6 @@ import model.Cliente;
 import model.Endereco;
 import model.Item;
 import model.Pedido;
-import model.Produto;
 import view.TelaCliente;
 /*
  * Todo gerenciamento de usuários será por essa classe de controle
@@ -55,27 +54,11 @@ public class GerenciamentoCliente {
         System.out.println("Endereço cadastrado com sucesso!");
     }
 
-    static String calculaFrete(double valorTotal) {
-        if (valorTotal >= 150) {
-            return "O frete é grátis!";
-        } else {
-            return "O frete é R$30.";
-        }
-    }
-
-    public static void addItemNoCarrinho(Produto produto, Integer quantidade) {
-        Item itemBuscado = new Item(produto, quantidade);
-    }
-
-    public static void criaCarrinhoDeCompras() {
-
-    }
-
     public static void setUsuarios(ArrayList<Cliente> usuarios) {
         GerenciamentoCliente.usuarios = usuarios;
     }
 
-    public static void mostrarTelaFinalizandoCompra(CarrinhoDeCompras novoCarrinho, Cliente novoCliente) {
+    public static void mostrarTelaFinalizandoCompra(CarrinhoDeCompras novoCarrinho, Cliente novoCliente) throws InterruptedException {
         ArrayList<Endereco> listaEnderecos = novoCliente.getEnderecos();
         TelaCliente.imprimirListaDeEnderecos(listaEnderecos);
         if (novoCliente.getEnderecos().isEmpty()) {

@@ -11,7 +11,7 @@ public class TelaPrincipal {
     /*
      * Método apenas para escrever menu na tela
      */
-    public static void mostraMenuInicial(){
+    public static void mostraMenuInicial() throws InterruptedException{
         System.out.print("\033[H\033[2J"); // Limpar a tela
         System.out.println("\t\t###########  SIMULADOR DE LOJA VIRTUAL  ###########\n");
         System.out.println("\tMENU INICIAL");
@@ -28,13 +28,8 @@ public class TelaPrincipal {
                 TelaCliente.mostraMenuUsuario(novoCarrinho);
             }
             case "2" -> TelaProduto.mostraMenuProduto();
-            case "3" -> {
-            }
-            case "4" -> {
-            }
             default -> {
             }
         }
-        input.close();
     }
 }

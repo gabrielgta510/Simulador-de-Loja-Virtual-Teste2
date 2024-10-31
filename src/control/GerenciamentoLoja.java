@@ -9,7 +9,16 @@ import model.Produto;
 public class GerenciamentoLoja {
     private static ArrayList<Produto> estoque = new ArrayList<>();
     private static Map<Integer, Produto> produtosPorNumero = new HashMap<>();
-    private static Integer numero = 0;
+    private static Integer numero = 10;
+
+    public static Integer getNumero() {
+        return numero;
+    }
+
+    public static void setNumero() {
+        int num = GerenciamentoLoja.getNumero() + 1;
+        GerenciamentoLoja.numero = num;
+    }
 
     public static Object buscaProduto(Integer indice) {
         //implementação simples de um buscador.
@@ -51,14 +60,16 @@ public class GerenciamentoLoja {
             return "A lista de produtos está vazia.";
         } else {
             // Imprimir a tabela
-            System.out.println("Nome:               |Custo:");
+            System.out.println("Nome:                     |Custo:      |Quantidade:");
+            System.out.println("----------------------------------------------------");
             double total = 0;
             for (Produto produto : estoque) {
-                String msg = String.format("|R$ %.2f\n", produto.getPrecoDeCusto());
+                String msg = String.format("|R$ %-7.2f  |%d", produto.getPrecoDeCusto(), produto.getQuantidade());
                 System.out.println(produto + msg);
                 total += produto.getPrecoDeCusto() * produto.getQuantidade();
             }
-            return String.format("\nTotal gasto no estoque: R$ %.2f", total);
+            System.out.println("----------------------------------------------------");
+            return String.format("Total gasto no estoque: R$ %.2f\n", total);
         }
     }
 
@@ -68,5 +79,17 @@ public class GerenciamentoLoja {
             String msg = String.format("|R$ %.2f", produto.getValor());
             System.out.println(produto + msg);
         }
+    }
+
+    public static ArrayList<Produto> getEstoque() {
+        return estoque;
+    }
+
+    public static void setEstoque(ArrayList<Produto> estoque) {
+        GerenciamentoLoja.estoque = estoque;
+    }
+
+    public static void setProdutosPorNumero(Map<Integer, Produto> produtosPorNumero) {
+        GerenciamentoLoja.produtosPorNumero = produtosPorNumero;
     }
 }
