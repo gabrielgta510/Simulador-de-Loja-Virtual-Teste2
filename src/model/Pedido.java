@@ -14,18 +14,18 @@ public class Pedido {
     private String statusPedido;
     private int numPedido;
     private CartaoDeCredito cartaoPagamento;
+    private double valorTotal;
 
 
-    public Pedido(Endereco enderecoEntrega, CartaoDeCredito cartaoPagamento, int numPedido, String statusPedido, ArrayList<Item> produtosPedido) {
+    public Pedido(Endereco enderecoEntrega, CartaoDeCredito cartaoPagamento, int numPedido, String statusPedido, ArrayList<Item> produtosPedido, double valorTotal) {
         this.produtosPedido = produtosPedido;
         this.dataPedido = LocalDateTime.now();
         this.enderecoEntrega = enderecoEntrega;
         this.cartaoPagamento = cartaoPagamento;
         this.numPedido = numPedido;
         this.statusPedido = statusPedido;
+        this.valorTotal = valorTotal;
     }
-
-
 
     public LocalDateTime getDataPedido() {
         return dataPedido;
@@ -64,6 +64,14 @@ public class Pedido {
 
     public void setProdutosPedido(ArrayList<Item> produtosPedido) {
         this.produtosPedido = produtosPedido;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
     
 }

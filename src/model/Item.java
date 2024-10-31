@@ -1,7 +1,7 @@
 package model;
 
 public class Item {
-    private Produto produto = null;
+    private Produto produto;
     private String nomeItem;
     private double valor;
     private int quantidade;
@@ -46,5 +46,9 @@ public class Item {
     @Override
     public String toString() {
         return String.format("%-20s %d X R$ %.2f\n", nomeItem, quantidade, valor);
+    }
+
+    public Produto getProduto() {
+        return produto;
     }
 }

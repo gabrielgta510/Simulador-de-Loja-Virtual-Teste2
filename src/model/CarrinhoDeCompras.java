@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class CarrinhoDeCompras {
     private ArrayList<Item> itens = new ArrayList<>();
     private String cupomDesconto;
+    private double valorTotal;
 
     public CarrinhoDeCompras(ArrayList<Item> itens, String cupomDesconto) {
         this.itens = itens;
@@ -20,6 +21,7 @@ public class CarrinhoDeCompras {
         if (quantidade <= produto.getQuantidade()) {
             Item item = new Item(produto, quantidade);
             this.itens.add(item);
+            this.valorTotal += produto.getValor() * quantidade;
             System.out.println(produto.getNomeProduto() + " foi adicionado ao carrinho!");
             GerenciamentoLoja.atualizarEstoque(produto, item);
             return false;
@@ -57,12 +59,18 @@ public class CarrinhoDeCompras {
         if (itens.isEmpty()) {
             return ("\nSeu carrinho está vazio.\n=========================================");
         } else {
-            double valorTotal = 0;
             for (Item item : itens) {
                 System.out.println(item);
-                valorTotal += item.getValor();
             }
-            return String.format("\nValor total: R$ %.2f\n=========================================", valorTotal);
+            return String.format("\nValor total: R$ %.2f\n=========================================", this.getValorTotal());
         }
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 }
